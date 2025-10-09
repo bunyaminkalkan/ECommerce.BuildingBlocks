@@ -85,12 +85,7 @@ public class EventBusRabbitMQ : BaseEventBus
         var eventName = @event.GetType().Name;
         eventName = ProcessEventName(eventName);
 
-        await consumerChannel.ExchangeDeclareAsync(
-            exchange: EventBusConfig.DefaultTopicName,
-            type: "direct",
-            durable: true,
-            autoDelete: false,
-            arguments: null);
+        await consumerChannel.ExchangeDeclareAsync(exchange: EventBusConfig.DefaultTopicName, type: "direct");
 
         var message = JsonConvert.SerializeObject(@event);
         var body = Encoding.UTF8.GetBytes(message);

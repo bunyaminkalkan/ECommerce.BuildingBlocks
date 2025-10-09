@@ -10,7 +10,7 @@ public class RabbitMQPersistentConnection : IDisposable
     private readonly IConnectionFactory connectionFactory;
     private readonly int retryCount;
     private IConnection connection;
-    private object lock_object = new object();
+    private readonly SemaphoreSlim _lock = new SemaphoreSlim(1, 1);
     private bool _disposed;
     public bool IsConnected => connection != null && connection.IsOpen;
 
@@ -33,19 +33,20 @@ public class RabbitMQPersistentConnection : IDisposable
         connection.Dispose();
     }
 
-
     public async Task<bool> TryConnectAsync()
     {
-        lock (lock_object)
+        await _lock.WaitAsync(); // async lock yerine geçer
+        try
         {
-            var policy = Policy.Handle<SocketException>()
+            var policy = Policy
+                .Handle<SocketException>()
                 .Or<BrokerUnreachableException>()
-                .WaitAndRetry(retryCount, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)), (ex, time) =>
-                {
-                }
-            );
+                .WaitAndRetryAsync(
+                    retryCount,
+                    retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt))
+                );
 
-            policy.Execute(async () =>
+            await policy.ExecuteAsync(async () =>
             {
                 connection = await connectionFactory.CreateConnectionAsync();
             });
@@ -55,14 +56,17 @@ public class RabbitMQPersistentConnection : IDisposable
                 connection.ConnectionShutdownAsync += Connection_ConnectionShutdownAsync;
                 connection.CallbackExceptionAsync += Connection_CallbackExceptionAsync;
                 connection.ConnectionBlockedAsync += Connection_ConnectionBlockedAsync;
-                // log
-
                 return true;
             }
 
             return false;
         }
+        finally
+        {
+            _lock.Release(); // kilidi serbest bırak
+        }
     }
+
 
     private async Task Connection_ConnectionBlockedAsync(object sender, ConnectionBlockedEventArgs @event)
     {
