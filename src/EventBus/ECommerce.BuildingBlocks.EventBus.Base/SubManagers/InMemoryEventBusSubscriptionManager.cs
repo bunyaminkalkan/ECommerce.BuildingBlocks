@@ -7,7 +7,7 @@ public class InMemoryEventBusSubscriptionManager : IEventBusSubscriptionManager
     private readonly Dictionary<string, List<SubscriptionInfo>> _handlers;
     private readonly List<Type> _eventTypes;
 
-    public event EventHandler<string> OnEventRemoved;
+    public event Func<object, string, Task> OnEventRemoved;
     public Func<string, string> eventNameGetter;
 
     public InMemoryEventBusSubscriptionManager(Func<string, string> eventNameGetter)

@@ -5,7 +5,7 @@ public interface IEventBusSubscriptionManager
 {
     bool IsEmpty { get; }
 
-    event EventHandler<string> OnEventRemoved;
+    event Func<object, string, Task> OnEventRemoved;
 
     void AddSubscription<T, TH>() where T : IntegrationEvent where TH : IIntegrationEventHandler<T>;
 
