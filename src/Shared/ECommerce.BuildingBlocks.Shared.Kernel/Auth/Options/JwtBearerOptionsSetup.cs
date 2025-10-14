@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
 using System.Text;
 
 namespace ECommerce.BuildingBlocks.Shared.Kernel.Auth.Options;
@@ -24,5 +25,6 @@ public class JwtBearerOptionsSetup : IPostConfigureOptions<JwtBearerOptions>
         options.TokenValidationParameters.ValidAudience = _jwtOptions.Audience;
         options.TokenValidationParameters.IssuerSigningKey = new SymmetricSecurityKey(
             Encoding.UTF8.GetBytes(_jwtOptions.SecretKey));
+        options.TokenValidationParameters.RoleClaimType = ClaimTypes.Role;
     }
 }
