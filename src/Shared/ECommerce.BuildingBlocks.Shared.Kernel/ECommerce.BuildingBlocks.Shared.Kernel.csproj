@@ -11,6 +11,7 @@
     <Description>Shared Library for ECommerce App</Description>
     <RepositoryUrl>https://github.com/bunyaminkalkan/ECommerce.BuildingBlocks</RepositoryUrl>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -18,6 +19,10 @@
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.9" />
   </ItemGroup>
 
 </Project>
