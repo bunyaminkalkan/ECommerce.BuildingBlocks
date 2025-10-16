@@ -1,24 +1,7 @@
-﻿using Newtonsoft.Json;
+﻿namespace ECommerce.BuildingBlocks.EventBus.Base.Events;
 
-namespace ECommerce.BuildingBlocks.EventBus.Base.Events;
-public class IntegrationEvent
+public abstract class IntegrationEvent
 {
-    [JsonProperty]
-    public Guid Id { get; private set; }
-
-    [JsonProperty]
-    public DateTime CreatedDate { get; private set; }
-
-    public IntegrationEvent()
-    {
-        Id = Guid.NewGuid();
-        CreatedDate = DateTime.UtcNow;
-    }
-
-    [JsonConstructor]
-    public IntegrationEvent(Guid id, DateTime createdDate)
-    {
-        Id = id;
-        CreatedDate = createdDate;
-    }
+    public Guid Id { get; init; } = Guid.NewGuid();
+    public DateTime CreatedDate { get; init; } = DateTime.UtcNow;
 }

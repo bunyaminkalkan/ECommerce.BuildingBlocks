@@ -1,12 +1,13 @@
 ﻿using ECommerce.BuildingBlocks.EventBus.Base.Events;
 
 namespace ECommerce.BuildingBlocks.EventBus.UnitTest.Events.Events;
+
 public class OrderCreatedEvent : IntegrationEvent
 {
-    public int Id { get; set; }
+    public int OrderIdValue { get; }
 
-    public OrderCreatedEvent(int id)
+    public OrderCreatedEvent(int orderIdValue)
     {
-        Id = id;
+        OrderIdValue = orderIdValue;
     }
 }

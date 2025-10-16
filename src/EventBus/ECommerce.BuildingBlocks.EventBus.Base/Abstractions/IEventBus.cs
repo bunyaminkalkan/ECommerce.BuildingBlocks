@@ -1,11 +1,18 @@
 ﻿using ECommerce.BuildingBlocks.EventBus.Base.Events;
 
 namespace ECommerce.BuildingBlocks.EventBus.Base.Abstractions;
+
 public interface IEventBus
 {
-    Task PublishAsync(IntegrationEvent @event);
+    /// <summary>
+    /// Publishes an integration event to the message bus
+    /// </summary>
+    Task PublishAsync<T>(T @event, CancellationToken cancellationToken = default)
+        where T : IntegrationEvent;
 
-    Task SubscribeAsync<T, TH>() where T : IntegrationEvent where TH : IIntegrationEventHandler<T>;
-
-    void UnSubscribe<T, TH>() where T : IntegrationEvent where TH : IIntegrationEventHandler<T>;
+    /// <summary>
+    /// Sends a command/message directly to a specific endpoint
+    /// </summary>
+    Task SendAsync<T>(T message, CancellationToken cancellationToken = default)
+        where T : IntegrationEvent;
 }

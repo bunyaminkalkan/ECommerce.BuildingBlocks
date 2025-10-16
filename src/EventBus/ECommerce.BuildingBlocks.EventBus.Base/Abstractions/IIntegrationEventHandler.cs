@@ -1,11 +1,13 @@
 ﻿using ECommerce.BuildingBlocks.EventBus.Base.Events;
+using MassTransit;
 
 namespace ECommerce.BuildingBlocks.EventBus.Base.Abstractions;
-public interface IIntegrationEventHandler<TIntegrationEvent> : IntegrationEventHandler where TIntegrationEvent : IntegrationEvent
-{
-    Task Handle(TIntegrationEvent @event);
-}
 
-public interface IntegrationEventHandler
+/// <summary>
+/// Marker interface for integration event handlers
+/// This is a wrapper around MassTransit's IConsumer for backward compatibility
+/// </summary>
+public interface IIntegrationEventHandler<in TIntegrationEvent> : IConsumer<TIntegrationEvent>
+    where TIntegrationEvent : IntegrationEvent
 {
 }
