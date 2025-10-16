@@ -5,7 +5,7 @@ namespace ECommerce.BuildingBlocks.Shared.Kernel.Extensions;
 
 public static class ExceptionMiddlewareExtension
 {
-    public static IApplicationBuilder UseExceptionMiddleware(IApplicationBuilder app)
+    public static IApplicationBuilder UseExceptionMiddleware(this IApplicationBuilder app)
     {
         return app.UseMiddleware<ExceptionMiddleware>();
     }
