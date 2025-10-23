@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace ECommerce.BuildingBlocks.Shared.Kernel.ValueObjects;
 
 public record Address
@@ -11,6 +13,7 @@ public record Address
     public string PostalCode { get; }
     public string Country { get; }
 
+    [JsonConstructor]
     private Address(
         string neighborhood,
         string street,
