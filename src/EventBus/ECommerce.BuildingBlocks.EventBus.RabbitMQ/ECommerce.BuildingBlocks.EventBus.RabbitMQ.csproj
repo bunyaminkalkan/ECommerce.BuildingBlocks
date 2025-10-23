@@ -1,17 +1,32 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+	  <TargetFramework>net9.0</TargetFramework>
+	  <ImplicitUsings>enable</ImplicitUsings>
+	  <Nullable>enable</Nullable>
+	  <PackageId>BK.$(AssemblyName)</PackageId>
+	  <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+	  <Authors>Bunyamin Kalkan</Authors>
+	  <Product>BK.$(AssemblyName)</Product>
+	  <Description>EventBus.RabbitMQ Library for ECommerce App</Description>
+	  <RepositoryUrl>https://github.com/bunyaminkalkan/ECommerce.BuildingBlocks</RepositoryUrl>
+	  <PackageLicenseFile>LICENSE</PackageLicenseFile>
+	  <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MassTransit.RabbitMQ" Version="8.5.4" />
+	  <None Include="..\..\..\LICENSE">
+		  <Pack>True</Pack>
+		  <PackagePath>\</PackagePath>
+	  </None>
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ECommerce.BuildingBlocks.EventBus.Base\ECommerce.BuildingBlocks.EventBus.Base.csproj" />
+    <PackageReference Include="MassTransit.RabbitMQ" Version="8.5.5" />
+	<PackageReference Include="BK.ECommerce.BuildingBlocks.EventBus.Base" Version="1.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
   </ItemGroup>
 
 </Project>
