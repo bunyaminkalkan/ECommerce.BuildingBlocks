@@ -11,7 +11,7 @@
 	  <Description>EventBus.Base Library for ECommerce App</Description>
 	  <RepositoryUrl>https://github.com/bunyaminkalkan/ECommerce.BuildingBlocks</RepositoryUrl>
 	  <PackageLicenseFile>LICENSE</PackageLicenseFile>
-	  <Version>1.0.3</Version>
+	  <Version>1.0.4</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="BK.ECommerce.BuildingBlocks.Shared.Kernel" Version="1.0.5" />
+    <PackageReference Include="BK.ECommerce.BuildingBlocks.Shared.Kernel" Version="1.0.6" />
     <PackageReference Include="MassTransit" Version="8.5.4" />
   </ItemGroup>
 
