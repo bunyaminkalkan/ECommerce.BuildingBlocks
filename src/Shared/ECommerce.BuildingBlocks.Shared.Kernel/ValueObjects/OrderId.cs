@@ -1,9 +1,12 @@
-﻿namespace ECommerce.BuildingBlocks.Shared.Kernel.ValueObjects;
+﻿using System.Text.Json.Serialization;
+
+namespace ECommerce.BuildingBlocks.Shared.Kernel.ValueObjects;
 
 public record OrderId
 {
     public Guid Value { get; }
 
+    [JsonConstructor]
     private OrderId(Guid value) => Value = value;
 
     public static OrderId Create() => new(Guid.CreateVersion7());

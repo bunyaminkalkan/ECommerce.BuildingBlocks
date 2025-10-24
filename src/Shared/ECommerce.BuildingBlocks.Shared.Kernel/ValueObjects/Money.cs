@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace ECommerce.BuildingBlocks.Shared.Kernel.ValueObjects;
 
 public record Money
@@ -5,6 +7,7 @@ public record Money
     public decimal Amount { get; }
     public string Currency { get; }
 
+    [JsonConstructor]
     private Money(decimal amount, string currency)
     {
         if (amount < 0)
